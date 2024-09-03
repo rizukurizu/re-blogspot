@@ -1,12 +1,14 @@
 # blogspot downloader
 
-This python script download all posts from blogspot and convert into epub or pdf, either in web page looks or rss feed looks.
+Script python ini mengunduh semua postingan dari blogspot dan mengubahnya menjadi epub atau pdf, baik dalam bentuk tampilan halaman web maupun rss feed.
 
-Not only blogspot, if any webpage contains rss feed, especially for wordpress, then it able to download in rss mode.
+Tidak hanya blogspot, jika halaman web manapun yang mengandung rss feed, terutama untuk wordpress, maka script ini dapat mengunduh dalam mode rss.
 
 ## Why ?
 
-The existing online services either need to paid, has limit of files, need to copy per-page manually, only support rss feed, or only support epub. This python script is free, no files limit as it run in your local machine/ip, download all pages/feed automatically, support both rss and web scraping(some blog rss is private or only one page), support both epub and pdf. It also support custom locale date. The most important thing: this is simple python code and you can feel free to modify it, e.g. custom html color, extra html header/footer, default directory ... etc :)
+Layanan online yang ada saat ini harus berbayar, memiliki batasan file, harus menyalin per halaman secara manual, hanya mendukung rss feed, atau hanya mendukung epub. 
+
+Skrip python ini gratis, tidak ada batasan file karena dijalankan di mesin/ip lokal Anda, mengunduh semua halaman/umpan secara otomatis, mendukung rss dan web scraping (beberapa rss blog bersifat pribadi atau hanya satu halaman), mendukung epub dan pdf. Ini juga mendukung tanggal lokal khusus. Yang paling penting: ini adalah kode python sederhana dan Anda dapat dengan bebas memodifikasinya, misalnya warna html kustom, header/footer html tambahan, direktori default... dll :)
 
 ## How to setup (Only support python3):
 
@@ -14,11 +16,12 @@ The existing online services either need to paid, has limit of files, need to co
 git clone https://github.com/limkokhole/blogspot-downloader.git
 cd blogspot-downloader/
 
-pip3 install -r requirements_py3.txt #python 3
+pip3 install -r requirements_py3.txt 
 
 In ubuntu, run `sudo apt install wkhtmltopdf`.
     
-pypub/ directory contains my miscellaneous bug fixes and customization from original <a href="https://github.com/wcember/pypub">Pypub</a>, and tested in python 3.8.5
+direktori pypub/ berisi berbagai perbaikan bug dan kustomisasi dari <a href=“https://github.com/wcember/pypub”>Pypub</a> yang asli, dan diuji di python 3.8.5
+
 </pre>
 
 ## How to run (Only support python3):
@@ -66,27 +69,27 @@ pypub/ directory contains my miscellaneous bug fixes and customization from orig
 
 ## Normal usage:
 
-    python3 blogspot_downloader.py [blogspot url] # Download blogspot as RSS Feed
+    python3 blogspot_downloader.py [url blogspot] # Unduh blogspot sebagai RSS Feed
 
-    python3 blogspot_downloader.py -1 # Any website link, or full(non-RSS) blogspot page
+    python3 blogspot_downloader.py -1 # Tautan situs web apa pun, atau halaman blogspot lengkap (non-RSS)
     python3 blogspot_downloader.py -1 [url]
 
-    python3 blogspot_downloader.py -lo [blogspot url] # To get list of blogspot urls which can save to /tmp/urls.list manually
-    python3 blogspot_downloader.py -1 </tmp/urls.list # Download above urls list. Currently you still need manually delete above output file.
+    python3 blogspot_downloader.py -lo [url blogspot] # Untuk mendapatkan daftar url blogspot yang dapat disimpan ke /tmp/urls.list secara manual
+    python3 blogspot_downloader.py -1 </tmp/urls.list # Unduh daftar url di atas. Saat ini Anda masih perlu menghapus secara manual file keluaran di atas.
     
 ## Details:
 
-It will asked the blogspot url if you don't pass [url] in command option.
+Ini akan menanyakan url blogspot jika Anda tidak memberikan [url] pada opsi perintah.
 
-Use -f rss_feed_url to download from rss feed, or -a webpage_url to download from webpage. Tips: you may lucky to find feed url by right-click on the webpage and choose "View Page Source", then search for "rss" keyword. Note that rss_feed / path might has impact to narrow the scope of feed, e.g. https://example.com/2018/05/ might narrow the feed only for may only, and https://example.com/2018/ might narrow the feed for year 2018.
+Gunakan -f rss_feed_url untuk mengunduh dari feed rss, atau -a webpage_url untuk mengunduh dari halaman web. Tips: Anda mungkin beruntung menemukan url feed dengan mengklik kanan pada halaman web dan memilih “View Page Source”, lalu mencari kata kunci “rss”. Perlu diperhatikan bahwa rss_feed / path dapat berdampak pada penyempitan cakupan feed, misalnya https://example.com/2018/05/ dapat mempersempit feed hanya untuk bulan Mei saja, dan https://example.com/2018/ dapat mempersempit feed untuk tahun 2018.
 
-Not all blogs works in -p pdf mode, you will quickly noticed this if you found duplicated layout for first few pages, then you can ctrl+c to stop it. Try remove -p or use -f feed_url instead in this case, or download epub only.
+Tidak semua blog bekerja dalam mode -p pdf, Anda akan segera menyadari hal ini jika Anda menemukan duplikasi tata letak untuk beberapa halaman pertama, maka Anda dapat menggunakan ctrl+c untuk menghentikannya. Coba hapus -p atau gunakan -f feed_url sebagai gantinya dalam kasus ini, atau unduh epub saja.
 
-This script designate in Linux and never test in Windows. This script also not designate run in multi process since it will remove /tmp trash file.
+Skrip ini ditujukan untuk Linux dan tidak pernah diuji di Windows. Skrip ini juga tidak dapat dijalankan dalam banyak proses karena akan menghapus file sampah /tmp.
 
-Duplicated filename will not replace but suffix with current timestamp.
+Nama file yang diduplikasi tidak akan diganti tetapi akan ditambahi dengan stempel waktu saat ini.
 
-ePUB file can edit manually. Simply change name to .zip, unzip it, edit the xhtml, and (inside epub directory) do `zip -rX ../<epub direcory name>.epub minetype.txt META-INF/ OEBPS/` to repack it easily.  I recommend Kchmviewer viewer and Sigli, but if it doesn't open since it may too strict in xhtml syntax, then you can try other viewer in this case (Sigli will try auto fix for you), and please don't feel hesitate to issue a ticket.
+File ePUB dapat diedit secara manual. Cukup ubah nama menjadi .zip, unzip, edit xhtml, dan (di dalam direktori epub) lakukan `zip -rX ../<nama direktori epub>.epub minetype.txt META-INF/ OEBPS/` untuk mengemas ulang dengan mudah.  Saya merekomendasikan penampil Kchmviewer dan Sigli, tetapi jika tidak bisa dibuka karena mungkin terlalu ketat dalam sintaks xhtml, maka Anda dapat mencoba penampil lain dalam kasus ini (Sigli akan mencoba memperbaiki secara otomatis untuk Anda), dan jangan ragu-ragu untuk mengeluarkan tiket.
 
 ## Sample Screenshots:
 
